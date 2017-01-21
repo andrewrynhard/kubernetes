@@ -33,7 +33,7 @@ import (
 const discoveryRetryTimeout = 5 * time.Second
 
 func RetrieveTrustedClusterInfo(d *kubeadmapi.TokenDiscovery) (*kubeadmapi.ClusterInfo, error) {
-	requestURL := fmt.Sprintf("http://%s/cluster-info/v1/?token-id=%s", d.Addresses[0], d.ID)
+	requestURL := fmt.Sprintf("https://%s/cluster-info/v1/?token-id=%s", d.Addresses[0], d.ID)
 	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to consturct an HTTP request [%v]", err)
