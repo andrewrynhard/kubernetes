@@ -332,12 +332,11 @@ func getAPIServerCommand(cfg *kubeadmapi.MasterConfiguration, selfHosted bool) [
 		}
 	}
 
-	// Use first address we are given
 	if len(cfg.API.AdvertiseAddresses) > 0 {
 		if selfHosted {
 			command = append(command, "--advertise-address=$(POD_IP)")
 		} else {
-			command = append(command, fmt.Sprintf("--advertise-address=%s", cfg.API.AdvertiseAddresses[0]))
+			command = append(command, fmt.Sprintf("--advertise-address=%s", strings.Join(cfg.API.AdvertiseAddresses, ",")))
 		}
 	}
 

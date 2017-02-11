@@ -388,7 +388,7 @@ func TestGetAPIServerCommand(t *testing.T) {
 		},
 		{
 			cfg: &kubeadmapi.MasterConfiguration{
-				API:        kubeadm.API{Port: 123, AdvertiseAddresses: []string{"foo"}},
+				API:        kubeadm.API{Port: 123, AdvertiseAddresses: []string{"foo", "bar"}},
 				Networking: kubeadm.Networking{ServiceSubnet: "bar"},
 			},
 			expected: []string{
@@ -407,7 +407,7 @@ func TestGetAPIServerCommand(t *testing.T) {
 				"--allow-privileged",
 				"--storage-backend=etcd3",
 				"--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname",
-				"--advertise-address=foo",
+				"--advertise-address=foo,bar",
 				"--etcd-servers=http://127.0.0.1:2379",
 			},
 		},
